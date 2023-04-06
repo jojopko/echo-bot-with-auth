@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "echo-bot-with-auth"
+version = "0.1.0"
+description = "Sample telegram bot with authorization"
+authors = ["jojopko <gamerat.github@gmail.com>"]
+readme = "README.md"
+packages = [{include = "echo_bot_with_auth"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+python-telegram-bot = "^20.2"
+flask = "^2.2.3"
+requests = "^2.28.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
