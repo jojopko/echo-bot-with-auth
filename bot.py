@@ -34,14 +34,23 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await context.bot.send_message(chat_id=update.effective_chat.id,
                                        text=update.message.text)
 
+async def login(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    url = f"http://{SERVER_HOST}/sign-up"
+    response = requests.get(url,
+                            params={"user_id": update.effective_user.id,
+                                    "user_name": update.effective_user.first_name,
+                                    "password": update.message.text.split(" ", 1)[1].strip()})
+    print(response)
 
 if __name__ == '__main__':
     application = ApplicationBuilder().token(TOKEN).build()
 
     start_handler = CommandHandler('start', start)
+    login_handler = CommandHandler('login', login)
     echo_handler = MessageHandler(filters.TEXT & (~filters.COMMAND), echo)
     application.add_handler(start_handler)
     application.add_handler(echo_handler)
+    application.add_handler(login_handler)
 
     application.run_polling()
 
